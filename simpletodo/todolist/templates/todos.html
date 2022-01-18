@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>Lista zadań</h1>
+
+
+        <hr>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">Prześlij zadanie</button>
+        </form>
+    </div>
+    <hr>
+
+    <div class="row">
+        {% for todo in todos %}
+            <p><a href="{% url 'todo' todo.id %}">{{ todo.title }}</a>{% if todo.is_completed %} <span class="oi oi-circle-check"></span> {% else %} <span class="oi oi-circle-x"></span> {% endif %}</p>
+            {% empty %}
+                <p>Lista zadań jest pusta. Spróbuj dodać jakieś zadanie!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

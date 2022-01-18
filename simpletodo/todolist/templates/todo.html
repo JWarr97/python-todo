@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2>{{ todo.title }}</h2>
+
+        <p>Czy wykonano?: {{ todo.is_completed }}</p>
+        <p>Opis zadania: {{ todo.desc }}</p>
+    </div>
+
+    {% if not todo.is_completed %}
+    <div class="row">
+        <a href="{% url 'todo' todo.id %}?change_status=finished">Zaznacz jako wykonane</a>
+    </div>
+    {% endif %}
+    <hr>
+    <a href="/todos">Powrót</a>
+</div>
+{% endblock %}
